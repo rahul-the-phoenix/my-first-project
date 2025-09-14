@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Dashboard</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #4e54c8, #8f94fb);
+      color: #fff;
+      padding: 20px;
+    }
+
+    .menu {
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .menu-btn {
+      background: #fff;
+      color: #4e54c8;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .menu-btn:hover {
+      background: #00e0ff;
+      color: #000;
+    }
+
+    .content {
+      display: none;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 15px;
+    }
+
+    .content h3 {
+      margin-top: 0;
+      border-bottom: 2px solid #fff;
+      padding-bottom: 5px;
+    }
+
+    .highlight {
+      color: #00e0ff;
+      font-weight: bold;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .progress-columns {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .progress-card {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      padding: 8px;
+      border: 1px solid #fff;
+      text-align: left;
+    }
+
+    canvas {
+      margin-top: 15px;
+      background: #fff;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="menu">
+    <!-- Student Details -->
+    <div class="menu-btn" onclick="toggleContent('details')">👤 Student Details</div>
+    <div class="content" id="details">
+      <h3>Student Details</h3>
+      <p><strong>Name:</strong> <span class="highlight">Rahul Manna</span></p>
+      <p><strong>School:</strong> XYZ School</p>
+      <p><strong>Languages:</strong> English</p>
+      <p><strong>Email:</strong> <span class="highlight">rahul@gmail.com</span></p>
+      <p><strong>Level:</strong> 🥇 Level 5 – Knowledge Explorer</p>
+      <p><strong>XP:</strong> 800 / 1000</p>
+    </div>
+
+    <!-- Achievements -->
+    <div class="menu-btn" onclick="toggleContent('achievements')">🏆 Achievements</div>
+    <div class="content" id="achievements">
+      <h3>Achievements</h3>
+      <ul>
+        <li>✅ Completed Newton Laws</li>
+        <li>🧩 Unlocked “Motion Master” badge</li>
+        <li>🔥 10-day learning streak</li>
+        <li>🥉 Top 3 in HOTS Challenge</li>
+      </ul>
+    </div>
+
+    <!-- Progress Tracker -->
+    <div class="menu-btn" onclick="toggleContent('progress')">📊 Progress Tracker</div>
+    <div class="content" id="progress">
+      <h3>Progress Tracker</h3>
+      <div class="progress-columns">
+        <div class="progress-card">
+          <h4>✅ Work Done</h4>
+          <ul>
+            <li>Pythagoras Theorem</li>
+            <li>Newton's Law</li>
+          </ul>
+        </div>
+        <div class="progress-card">
+          <h4>🕒 Pending</h4>
+          <ul>
+            <li>Cell Division</li>
+          </ul>
+        </div>
+        <div class="progress-card">
+          <h4>📈 Graphical View</h4>
+          <canvas id="progressChart" width="200" height="150"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Work Done -->
+    <div class="menu-btn" onclick="toggleContent('workdone')">📁 Work Done</div>
+    <div class="content" id="workdone">
+      <h3>Work Done</h3>
+      <ul>
+        <li>📝 Pythagoras Theorem Practice</li>
+        <li>⚙ Newton’s Law Experiment</li>
+      </ul>
+    </div>
+
+    <!-- Logout -->
+    <div class="menu-btn" onclick="toggleContent('logout')">🚪 Logout</div>
+    <div class="content" id="logout">
+      <h3>Logout</h3>
+      <p>You have been logged out successfully.</p>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    function toggleContent(id) {
+      const sections = document.querySelectorAll('.content');
+      sections.forEach(sec => sec.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+    }
+
+    // Chart for graphical view
+    const ctx = document.getElementById('progressChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Work Done', 'Pending'],
+        datasets: [{
+          data: [2, 1],
+          backgroundColor: ['#00e0ff', '#ff4d4d']
+        }]
+      }
+    });
+  </script>
+</body>
+</html>
